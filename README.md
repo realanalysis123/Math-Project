@@ -1,6 +1,4 @@
 ﻿# Math-Project
-# Math Project
-
 A collection of mathematics and statistics write-ups typeset in LaTeX. This repository only contains the typeset results (`.tex` source files and compiled PDFs), such as proofs, derivations, and worked solutions.
 
 ## Contents
