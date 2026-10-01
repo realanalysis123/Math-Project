@@ -1,0 +1,165 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[pages=all]{background}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{import}
+\usepackage[edges]{forest}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  left=1.5cm,
+  right=1.5cm,
+  top=2.5cm,
+  bottom=2.5cm,
+  headheight=15pt,
+  headsep=0.8cm,
+  footskip=1.2cm
+]{geometry}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usetikzlibrary{arrows.meta}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\parindent 0px
+\usepackage[pages=all]{background}
+
+\backgroundsetup{
+  scale=4,                 
+  color=blue!40,            
+  angle=45,                 
+  opacity=0.6,              
+  contents={Future Data Scientist}  
+}
+\title{All Linear Algebra Proof}
+\author{Kristian Aga}
+\date{September 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Mengapa harus ada?}
+Entahlah, akhir-akhir ini buat banyak project. Akan tetapi, gua belum membuat math project. Tulisan ini isinya beragam aljabar linear proof dari mudah(taraf soal rutin) hingga sulit(Taraf ONMIPA) yang gua ketik ketika gua lagi \textbf{mood}. Selain itu, ini juga bisa dipakai sebagai tata cara membuktikan sesuatu secara matematis yang bisa di pakai oleh insan \textit{novarions} terkece. \textbf{if you find any mistakes, let me know!!!}
+
+\section{Notasi}
+\begin{enumerate}
+    \item Kita definisikan suatu entri baris $i$ dan kolom $j$ matriks $\mathbf{A}$ adalah $a_{ij} $ atau $(\mathbf{A})_{ij}$
+    \item $\mathbb{N}$ menyatakan himpunan bilangan asli
+    \item $\mathbb{Z}$ menyatakan himpunan bilangan bulat
+    \item $\mathbb{R}$ menyatakan himpunan bilangan rill
+    \item tr($\mathbf{A}$)  menyatakan \textit{trace} atau jumlah entri diagonal utama matriks $\mathbf A$
+\end{enumerate}
+\section{Problem}
+\begin{enumerate}
+    \item Misalkan $\mathbf{A}$ adalah sebarang matriks $m\times n$. Tunjukkan bahwa jika $k\mathbf{A} = \mathbf{0}$ maka $k = 0$ atau $\mathbf{A} = \mathbf{0}$
+    
+\textbf{Bukti.} Misalkan $a_{ij}$ entri dari $\mathbf{A}$, di mana $1\le i\le m$ dan $1\le j \le n$, $i,j\in \mathbb{N}$. Perhatikan bahwa entri $i,j$ dari $k\mathbf{A}$ adalah
+\begin{align*}
+    (k\mathbf{A})_{ij} & = k (\mathbf{A})_{ij} =ka_{ij}
+\end{align*}
+    Karena $k\mathbf{A} = \mathbf{0}$ haruslah 
+    \[ka_{ij} = 0\]
+
+    ada dua kasus, yakni ketika $k = 0$ atau $a_{ij} = 0$. Saat $k\neq 0$ dan $i,j$ sebarang indeks di baris dan kolom $\mathbf{A}$. Maka $\mathbf{A}$ entrinya semua nol atau $\mathbf{A} = \mathbf{0}$ \qed
+
+    \item Misalkan $\mathbf{I_n}$ suatu identitas. Buktikan bahwa $\mathbf{AI} = \mathbf{IA}$ untuk setiap matriks $A_{n\times n}$
+
+    \textbf{Bukti.} Kita bisa tuliskan entri suatu matriks $\mathbf{I_n}$ sebagai berikut
+    \[\mathbf{(I)_{ij}} = \begin{cases}
+        1, i = j\\ 0, i \neq j
+    \end{cases}\]
+    Tinjau kalau
+    \begin{align*}
+        \mathbf{(AI)}_{ij} &= \sum_{k = 1}^n (\mathbf{A})_{ik}(\mathbf{I})_{kj}
+    \end{align*}
+    Perhatikan untuk $k\neq j $, kita punya $\mathbf{I}_{kj} = 0$ dan untuk $k= j$, kita punya   $\mathbf{I}_{kj} = 1$. Sehingga kita  peroleh
+      \begin{align*}
+        \mathbf{(AI)}_{ij} &= \sum_{k = 1}^n (\mathbf{A})_{ik}(\mathbf{I})_{kj}
+        \\
+        & = (\mathbf{A})_{ij}\times 1
+        \\
+        &= \mathbf{A}_{ij} \tag{1}
+    \end{align*}
+    Dengan langkah serupa, 
+    \begin{align*}
+        \mathbf{(IA)}_{ij} &= \sum_{k = 1}^n (\mathbf{I})_{ik}(\mathbf{A})_{kj}
+        \\
+        & =1\times  (\mathbf{A})_{ij}
+        \\
+        &= \mathbf{A}_{ij} \tag{2}
+    \end{align*}
+    Akibatnya $\mathbf{AI} = \mathbf{IA} = \mathbf{A}$\qed
+    \item Buktikan jika $\mathbf{A}$ dan $\mathbf{B}$ berukuran $n\times n$, maka
+    \[\text{tr}(\mathbf{A}+\mathbf{B})  = \text{tr($\mathbf{A})$}+\text{tr($\mathbf{B}$)}\]
+     \textbf{Bukti.} Perhatikan kalau
+    \begin{align*}
+        \text{tr}(\mathbf{A}+\mathbf{B}) &= \sum_{i= 1}^n (a_{ii}+b_{ii})\\
+        & = \sum_{i = 1}^n a_{ii} +\sum_{i = 1}^nb_{ii} 
+        \\
+        & = \text{tr}(\mathbf{A}) + \text{tr}(\mathbf B)
+    \end{align*} \qed
+
+    \item Jika $\mathbf{AB} = \mathbf{A}$ dan $\mathbf{BA} = \mathbf{B} $ maka $\mathbf{A}$ dan $\mathbf{B}$ keduanya adalah matriks idempoten
+
+
+    \textbf{Bukti.} Perhatikan bahwa
+    \begin{align*}
+    \mathbf{A}\mathbf{B} &= \mathbf{A}\\
+    \mathbf{A}\mathbf{B}\mathbf{A} &= \mathbf{A}^2\tag{Kalikan A dari kanan}
+    \\
+    \mathbf{AB}& = \mathbf{A}^2\tag{Substitusi BA = B}
+    \end{align*}
+    Akibatnya kita punya $\mathbf{A} = \mathbf{A}^2$. Dengan langkah serupa kita dapatkan
+     \begin{align*}
+    \mathbf{B}\mathbf{A} &= \mathbf{B}\\
+    \mathbf{B}\mathbf{A}\mathbf{B} &= \mathbf{B}^2\tag{Kalikan B dari kanan}
+    \\
+    \mathbf{BA}& = \mathbf{B}^2\tag{Substitusi AB = A}
+    \end{align*}
+    sehingga terbukti $\mathbf{A},\mathbf{B}$ keduanya idempoten \qed
+
+    \item Jika $\mathbf{AB} = \mathbf{BA} $ maka 
+    $(\mathbf{AB})^n = \mathbf{A}^n\mathbf{B}^n $
+  
+    
+    \textbf{Bukti.} Perhatikan bahwa 
+    \[\mathbf{AB}^n = \mathbf{A}\mathbf{B}...\mathbf{B} = \mathbf{BB}...\mathbf{BA} = \mathbf{B}^n\mathbf{A} \tag{1}\]
+    Sehingga
+    \begin{align*}
+        (\mathbf{AB})^n & = \underbrace{(\mathbf{AB})(\mathbf{AB})...(\mathbf{AB})}_n
+        \\
+        & = \mathbf{A}(\mathbf{BA})...(\mathbf{BA})\textbf{B}\\
+        & = \mathbf{A}(\mathbf{AB})(\mathbf{BA}) ... (\mathbf{AB}) \\
+        & = \mathbf{A}\mathbf{A}\mathbf{A} ... \mathbf{B}\mathbf{B{\mathbf{B}}} \\
+        & = \mathbf{A}^n \mathbf{B}^n
+    \end{align*}
+    \qed
+    
+    \textbf{Bukti dengan induksi.} untuk $n =1$, jelas benar. Asumsikan $n = k$ benar, Akan ditunjukkan $n = k+1$ juga benar. Perhatikan bahwa
+    \begin{align*}
+        (\mathbf{A}\mathbf{B})^{k+1} & = \mathbf{AB}(\underbrace{(\mathbf{AB})(\mathbf{AB})...(\mathbf{AB})}_k)\\
+        & =\mathbf{AB}\mathbf{A}^k\mathbf{B}^k \tag{Lihat asumsi induksi}
+        \\ 
+        & =\mathbf{AB}\mathbf{A}^k\mathbf{B}^k \\
+        & = \mathbf{A}^{k+1}\mathbf{B}^{k+1}\tag{Substitusi (1)}
+    \end{align*}\qed
+    \item  $(\mathbf{AB})^t = \mathbf{B}^t \mathbf{A}^t$
+
+    \textbf{Bukti.} Misalkan $\mathbf{A}$ matriks berukuran $p\times  q$ dan $\mathbf{B}$ matriks berukuran $q\times  r$. Maka
+    \begin{align*}
+    (\mathbf{AB})^t_{ij} &= (\mathbf{AB})_{ji}  \\
+      &= \sum_{k = 1}^q a_{jk}b_{ki}\\
+      & =  \sum_{k = 1}^q b_{ki}a_{jk}\\
+      &  =  \sum_{k = 1}^q (b_{ik})^t(a_{kj})^t
+      \\
+      & = \mathbf{B}^t\mathbf{A}^t
+    \end{align*}
+     \end{enumerate}
+\end{document}
